@@ -1,4 +1,15 @@
-GET http://localhost:4020/balance
+#POST http://localhost:4020/api/transaction/outcome
+#Content-Type: application/json Cookie: key=first-value
+#{
+#    "company":
+#     {
+#        "id": 1,
+#        "name": "Apple",
+#        "balance": 800
+#    },
+#    "transactionValue": 200
+#}
+GET http://localhost:4020/api/hello_world
 #//
 #		<dependency>
 #			<groupId>org.springframework.boot</groupId>

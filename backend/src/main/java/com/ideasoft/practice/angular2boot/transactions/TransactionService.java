@@ -23,6 +23,7 @@ public class TransactionService {
     }
 
 
+    @Transactional
     @PostMapping(path = "/income", consumes = "application/json", produces = "application/json")
     public TransactionBean incomeTransaction(@RequestBody TransactionBean transaction){
         CompanyBean company = companiesRepository.findById(transaction.getCompany().getId()).get();
@@ -31,7 +32,7 @@ public class TransactionService {
         return transactionsRepository.save(transaction);
     }
 
-
+    @Transactional
     @PostMapping(path = "/outcome", consumes = "application/json", produces = "application/json")
     public TransactionBean outcomeTransaction(@RequestBody TransactionBean transaction) {
         CompanyBean company = companiesRepository.findById(transaction.getCompany().getId()).get();

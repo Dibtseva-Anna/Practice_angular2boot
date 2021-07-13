@@ -30,7 +30,9 @@ export class AppComponent {
     this.post(index, 'income');
   }
   public postOutcome(index : number){
-    this.post(index, 'outcome');
+    for (let i : number = 0; i < 50; i++){
+      this.post(index, 'outcome');
+    }
   }
   private post(index : number, endpoint : string){
     let company = this.companies[index];
