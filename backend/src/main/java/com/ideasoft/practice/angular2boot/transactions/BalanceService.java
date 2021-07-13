@@ -3,11 +3,13 @@ package com.ideasoft.practice.angular2boot.transactions;
 import com.ideasoft.practice.angular2boot.entities.CompanyBean;
 import com.ideasoft.practice.angular2boot.repositories.CompaniesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RequestMapping("/balance")
+@CrossOrigin("http://localhost:4200")
+@RequestMapping("/api/balance")
 @RestController
 public class BalanceService {
     private final CompaniesRepository companiesRepository;

@@ -77,3 +77,8 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# build and run .bat
+build.bat
+run-back.bat
+run-front.bat

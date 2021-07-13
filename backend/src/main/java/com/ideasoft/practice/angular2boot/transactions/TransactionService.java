@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RequestMapping("/transaction")
+@RequestMapping("/api/transaction")
 @RestController
 public class TransactionService {
     private final CompaniesRepository companiesRepository;
