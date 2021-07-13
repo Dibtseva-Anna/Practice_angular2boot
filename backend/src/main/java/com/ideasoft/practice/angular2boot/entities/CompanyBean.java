@@ -3,15 +3,38 @@ package com.ideasoft.practice.angular2boot.entities;
 import javax.persistence.*;
 
 @Entity
-@Table
+@Table(name = "company_balance")
 public class CompanyBean {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id_c")
     private Long id;
 
-    @Column
+    @Column(name = "company_name")
     private String name;
 
-    @Column
+    @Column(name = "balance")
     private Double balance;
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Double getBalance() {
+        return balance;
+    }
+
+    @Override
+    public String toString() {
+        return "CompanyBean{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", balance=" + balance +
+                '}';
+    }
 }
