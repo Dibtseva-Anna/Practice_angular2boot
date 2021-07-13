@@ -10,11 +10,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/balance")
 @RestController
 public class BalanceService {
-    @Autowired
-    CompaniesRepository companiesRepository;
+    private final CompaniesRepository companiesRepository;
 
-    @GetMapping
+    @Autowired
+    public BalanceService(CompaniesRepository companiesRepository) {
+        this.companiesRepository = companiesRepository;
+    }
+
+    @GetMapping(produces = "application/json")
     public Iterable<CompanyBean> getCompanies(){
         return companiesRepository.findAll();
     }
+
+
 }
