@@ -29,7 +29,7 @@
       <th>Firm</th>
       <th>Balance</th>
     </tr>
-    <tr *ngFor="let company of companies"><td>{{company.id}}</td><td>{{company.name}}</td><td>{{company.balance}}</td></tr>
+    <tr *ngFor="let company of companies; let i = index"><td>{{company.id}}</td><td>{{company.name}}</td><td>{{company.balance}}</td><td><button (click)="postIncome(i)">income</button></td><td><button (click)="postOutcome(i)">outcome</button></td></tr>
   </table>
 
 

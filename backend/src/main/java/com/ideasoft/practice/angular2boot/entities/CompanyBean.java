@@ -29,6 +29,10 @@ public class CompanyBean {
         return balance;
     }
 
+    public void setBalance(Double balance) {
+        this.balance = balance;
+    }
+
     @Override
     public String toString() {
         return "CompanyBean{" +
