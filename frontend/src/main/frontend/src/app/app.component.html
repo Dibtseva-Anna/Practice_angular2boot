@@ -9,11 +9,10 @@
 
 <style>
 
-
   .table {
     top: 60px;
     position: absolute;
-    margin-left: 500px;
+    margin-left: 450px;
     width: 500px;
     background-color: #cce9f8;
   }
@@ -22,14 +21,22 @@
 
 <!-- Toolbar -->
 <div>
-  <table class="table" name="Firms'BalancesTable" cols="3" border="3">
+  <table class="table" name="Firms'BalancesTable" cols="5" border="3">
     <caption><H3>Firms' balances</H3></caption>
     <tr>
       <th>Id</th>
       <th>Firm</th>
       <th>Balance</th>
+      <th>Sum</th>
+      <th>Transaction</th>
     </tr>
-    <tr *ngFor="let company of companies; let i = index"><td>{{company.id}}</td><td>{{company.name}}</td><td>{{company.balance}}</td><td><button (click)="postIncoming(i)">incoming</button></td><td><button (click)="postOutgoing(i)">outgoing</button></td></tr>
+    <tr *ngFor="let company of companies; let i = index">
+      <td>{{company.id}}</td>
+      <td>{{company.name}}</td>
+      <td>{{company.balance}}</td>
+      <td><input name="sumOfTransaction" type="text"></td>
+      <td><button (click)="postIncoming(i)" style="width: 100%">incoming</button><button (click)="postOutgoing(i)" style="width: 100%">outgoing</button></td>
+    </tr>
   </table>
 
 
