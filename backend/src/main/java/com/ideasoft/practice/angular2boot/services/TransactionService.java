@@ -1,4 +1,4 @@
-package com.ideasoft.practice.angular2boot.transactions;
+package com.ideasoft.practice.angular2boot.services;
 
 import com.ideasoft.practice.angular2boot.entities.CompanyBean;
 import com.ideasoft.practice.angular2boot.entities.TransactionBean;

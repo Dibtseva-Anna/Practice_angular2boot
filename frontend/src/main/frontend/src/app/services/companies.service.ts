@@ -9,7 +9,7 @@ export interface Company {
 
 @Injectable()
 export class CompaniesService {
-  private url : string = 'http://localhost:4020/api/balance/';
+  private url : string = 'http://localhost:4020/v1/balance/';
 
   constructor(private httpClient : HttpClient) {  }
 

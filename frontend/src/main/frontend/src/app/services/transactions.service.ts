@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 
 @Injectable()
 export class TransactionsService {
-  private url : string = 'http://localhost:4020/api/transaction/';
+  private url : string = 'http://localhost:4020/v1/transaction/';
 
   constructor(private httpClient : HttpClient) {  }
 

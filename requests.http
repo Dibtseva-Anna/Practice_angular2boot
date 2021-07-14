@@ -9,14 +9,4 @@
 #    },
 #    "transactionValue": 200
 #}
-GET http://localhost:4020/api/hello_world
 #//
-#		<dependency>
-#			<groupId>org.springframework.boot</groupId>
-#			<artifactId>spring-boot-starter-security</artifactId>
-#		</dependency>
-#<dependency>
-#			<groupId>org.springframework.security</groupId>
-#			<artifactId>spring-security-test</artifactId>
-#			<scope>test</scope>
-#		</dependency>
