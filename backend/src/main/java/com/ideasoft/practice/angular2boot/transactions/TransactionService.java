@@ -2,15 +2,19 @@ package com.ideasoft.practice.angular2boot.transactions;
 
 import com.ideasoft.practice.angular2boot.entities.CompanyBean;
 import com.ideasoft.practice.angular2boot.entities.TransactionBean;
+import com.ideasoft.practice.angular2boot.exceptions.TransactionValueBiggerThanCompanyBalanceException;
 import com.ideasoft.practice.angular2boot.repositories.CompaniesRepository;
 import com.ideasoft.practice.angular2boot.repositories.TransactionsRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 
 @CrossOrigin("http://localhost:4200")
-@RequestMapping("/api/transaction")
+@RequestMapping("/v1/transaction")
 @RestController
 public class TransactionService {
     private final CompaniesRepository companiesRepository;
@@ -23,27 +27,25 @@ public class TransactionService {
     }
 
 
-    @Transactional
-    @PostMapping(path = "/income", consumes = "application/json", produces = "application/json")
-    public TransactionBean incomeTransaction(@RequestBody TransactionBean transaction){
-        CompanyBean company = companiesRepository.findById(transaction.getCompany().getId()).get();
-        company.setBalance(company.getBalance() + transaction.getTransactionValue());
-        companiesRepository.save(company);
+    @Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.SERIALIZABLE)
+    @PostMapping(path = "/incoming", consumes = "application/json", produces = "application/json")
+    @ResponseBody
+    public TransactionBean incomingTransaction(@RequestBody TransactionBean transaction) {
         return transactionsRepository.save(transaction);
     }
 
-    @Transactional
-    @PostMapping(path = "/outcome", consumes = "application/json", produces = "application/json")
-    public TransactionBean outcomeTransaction(@RequestBody TransactionBean transaction) {
+    @Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.SERIALIZABLE)
+    @PostMapping(path = "/outgoing", consumes = "application/json", produces = "application/json")
+    @ResponseBody
+    public TransactionBean outgoingTransaction(@RequestBody TransactionBean transaction) {
         CompanyBean company = companiesRepository.findById(transaction.getCompany().getId()).get();
-        transaction.setTransactionValue(transaction.getTransactionValue() * (-1));
-        Double sum = company.getBalance() + transaction.getTransactionValue();
-        if(sum < 0){
-            throw new RuntimeException();
+        Double difference = company.getBalance() - transaction.getTransactionValue();
+        if (difference < 0) {
+            throw new TransactionValueBiggerThanCompanyBalanceException(company.getBalance(),
+                    transaction.getTransactionValue());
         }
-        company.setBalance(sum);
+        transaction.setTransactionValue(transaction.getTransactionValue() * (-1));
         TransactionBean result = transactionsRepository.save(transaction);
-        companiesRepository.save(company);
         return result;
     }
 }

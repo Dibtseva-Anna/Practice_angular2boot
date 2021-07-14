@@ -1,8 +1,5 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Company } from "./companies.service";
-
-
 
 @Injectable()
 export class TransactionsService {
