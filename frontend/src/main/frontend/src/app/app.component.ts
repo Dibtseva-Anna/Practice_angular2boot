@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {CompaniesService, Company} from './services/companies.service';
-import {TransactionsService} from "./services/transactions.service";
-import {HttpErrorResponse} from "@angular/common/http";
+import {TransactionsService} from './services/transactions.service';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -27,16 +27,14 @@ export class AppComponent {
         }
       )
   }
-  public postIncoming(index : number){
-      this.post(index, 'incoming');
+  public postIncoming(index : number, transactionValue : number){
+      this.post(index, transactionValue, 'incoming');
   }
-  public postOutgoing(index : number){
-     //for (let i : number = 0; i < 10; i++)
-      this.post(index, 'outgoing');
+  public postOutgoing(index : number, transactionValue : number){
+      this.post(index, transactionValue, 'outgoing');
   }
-  private post(index : number, endpoint : string){
+  private post(index : number, transactionValue : number, endpoint : string){
     let company = this.companies[index];
-    let transactionValue = 200;
     this.transactionsService.post(endpoint, {company, transactionValue})
       .subscribe(
         (data : any) => {
@@ -47,7 +45,9 @@ export class AppComponent {
           console.log(error);
           //422 == UnprocessableEntity, throws when transaction value > company's balance
           if(error.status == 422){
-
+            let message = document.getElementById('message');
+            if(message != null)
+              message.hidden = false;
           }
           //500 == InternalServerError, throws when another transactions blocks
           if(error.status == 500){
