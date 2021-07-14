@@ -8,15 +8,17 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 <style>
-
   .table {
+    margin-left: 450px;
     top: 60px;
     position: absolute;
-    margin-left: 450px;
     width: 500px;
     background-color: #cce9f8;
   }
   .message {
+    margin-top: 35px;
+    margin-left: 450px;
+    font-size: 30px;
     color: #ff0000;
   }
 
@@ -37,11 +39,11 @@
       <td>{{company.id}}</td>
       <td>{{company.name}}</td>
       <td>{{company.balance}}</td>
-      <td><input id="sumOfTransaction" type="text"></td>
-      <td><button (click)="postIncoming(i, 200)" style="width: 100%">incoming</button><button (click)="postOutgoing(i, 200)" style="width: 100%">outgoing</button></td>
+      <td><input type="text" #inputElement (input)="transactionValues[i] = inputElement.value"></td>
+      <td><button (click)="postIncoming(i)" style="width: 100%">incoming</button><button (click)="postOutgoing(i)" style="width: 100%">outgoing</button></td>
     </tr>
   </table>
-  <p hidden="true" id="message" class="message">Transaction value bigger then company's balance</p>
+  <p hidden="true" id="message" class="message">{{errorText}}</p>
 
 </div>
 

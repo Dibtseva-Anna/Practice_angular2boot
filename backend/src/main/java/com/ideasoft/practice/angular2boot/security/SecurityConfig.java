@@ -24,19 +24,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/v1/transaction/**").permitAll()
-                .antMatchers("/v1/balance/**").hasRole("ADMIN")
-                .and().formLogin()
-                .and().logout().logoutSuccessUrl("/login").permitAll()
-                .and().csrf().disable();
+            .antMatchers("/**").hasRole("ADMIN")
+            .and().formLogin()
+            .and().logout().logoutSuccessUrl("/login").permitAll()
+            .and().csrf().disable();
     }
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception
     {
         auth.inMemoryAuthentication()
-                .passwordEncoder(passwordEncoder)
-                .withUser("user").password(passwordEncoder.encode("user")).roles("USER")
-                .and()
-                .withUser("admin").password(passwordEncoder.encode("admin")).roles("USER", "ADMIN");
+            .passwordEncoder(passwordEncoder)
+            .withUser("admin").password(passwordEncoder.encode("admin")).roles("USER", "ADMIN");
     }
 }
