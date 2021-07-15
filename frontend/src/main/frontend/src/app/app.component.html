@@ -29,14 +29,14 @@
   <table class="table" name="Firms'BalancesTable" cols="5" border="3">
     <caption><H3>Firms' balances</H3></caption>
     <tr>
-      <th>Id</th>
+      <th>#</th>
       <th>Firm</th>
       <th>Balance</th>
       <th>Sum</th>
       <th>Transaction</th>
     </tr>
     <tr *ngFor="let company of companies; let i = index">
-      <td>{{company.id}}</td>
+      <td>{{i + 1}}</td>
       <td>{{company.name}}</td>
       <td>{{company.balance}}</td>
       <td><input type="text" #inputElement (input)="transactionValues[i] = inputElement.value"></td>
